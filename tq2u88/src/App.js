@@ -1,20 +1,24 @@
-import React from 'react'
-import Square from "./Square"
-import { useState } from 'react';
+import React from "react";
+import Square from "./Square";
+import { useState } from "react";
 
 export default function Board() {
-
   const handleClick = (i) => {
-    const nextSquares = squares.slice()
-    nextSquares[i] = "X"
-    setSquares(nextSquares)
-  }
+    const nextSquares = squares.slice();
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+    setSquares(nextSquares);
+    setXIsNext(!xIsNext);
+  };
 
-  const [squares, setSquares] = useState(Array(9).fill(null))
+  const [xIsNext, setXIsNext] = useState(true);
+  const [squares, setSquares] = useState(Array(9).fill(null));
   return (
     <div>
-     
-     <div className="board-row">
+      <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
         <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
@@ -29,6 +33,6 @@ export default function Board() {
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
-      </div>
+    </div>
   );
 }
