@@ -21,16 +21,24 @@ export default function Board() {
 
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
- 
+  
   const winner = calculateWinner(squares);
-  let status;
+  
 
+  let status;
+  let move
   if (winner) {
-    status = "Winner:" + winner 
+    status = "Winner:" + winner[0]
+    move = winner[1]
   } else {
     status = "Next player:" +  (xIsNext ? "X" : "O");
   }
-
+  console.log('above move')
+console.log(move)
+  // const winning = (winner) => {
+  //   console.log(winner[1])
+  //   // return winner[1]
+  // }
   
   return (
     <div>
@@ -67,7 +75,8 @@ export default function Board() {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        let sq = [squares[a], [a, b, c]] 
+        return sq;
       }
     }
     return null;
