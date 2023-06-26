@@ -2,7 +2,7 @@
 function Square({value, onSquareClick}) {
 
   const handleClick = () => {
-    console.log("clicked");
+    console.log("clicked - handleClick()");
   }
 
   return (
